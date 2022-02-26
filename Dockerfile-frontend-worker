@@ -1,0 +1,10 @@
+FROM node:14
+EXPOSE 3000
+WORKDIR /usr/src/app
+VOLUME /usr/src/app
+COPY package.json  ./
+COPY yarn.lock  ./
+RUN yarn 
+COPY . .
+RUN chmod +x /usr/src/app/wait-for-it.sh
+RUN yarn run build
