@@ -1,0 +1,11 @@
+FROM node:14
+WORKDIR /usr/src/app
+RUN echo 0.1.25
+RUN curl https://github.com/vendure-ecommerce/storefront/archive/v0.1.25.zip  -L -o storefront.zip
+RUN unzip storefront.zip
+RUN cp -a "storefront-0.1.25/."  .
+RUN yarn
+RUN yarn build:ssr:docker 
+CMD ["node", "dist/server/main.js"]
+EXPOSE 4000
+VOLUME /usr/src/app
